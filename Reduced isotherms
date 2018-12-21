@@ -1,0 +1,43 @@
+from numpy import *
+from pylab import *
+
+#Defino la función dada para el ejercicio
+
+def presion(Tr,Vr):
+    Pr = (8.*Tr/(3.*Vr-1.))-(3./Vr**2.)
+    return Pr
+
+'''
+Para representar los gases concretos que quieras elegir simplemente
+defines a=... y b=..., pones Tc=(8*a)/(27*R*b) , luego defines un
+array de temperaturas (T) entorno al Tc crítico que obtengas. Después de tener
+el array T, pones Tr= T/Tc y sin cambiar nada deberias tener tu gráfica ready.
+'''
+R = 8.314 * 10**(-2)
+a = 1.370
+b = 0.0387
+Tc=(8*a)/(27*R*b)
+
+#Ahora defino las variables 
+#representar Pr frente Vr
+T = array ([56.2, 86.2, Tc, 156.2, 206.2])
+Vr= arange(0.4,3.5,0.01)
+Tr= T/Tc
+
+#Dibujo la grafica mediante un bucle for 
+
+for i in Tr:
+    plot(Vr,presion(i,Vr), label='Tr =%.2f ' % i)
+    
+xlabel ('$v_r$', fontsize = 17)
+title('Diagrama presion-volumen reducidos del nitrogeno')
+ylabel ('$P_r$', fontsize = 17)
+grid()
+legend(loc='best')
+xlim(0.4, 2.5)
+
+'''
+Etanol 
+a = 12.18
+b = 0.08407
+'''
