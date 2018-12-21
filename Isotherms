@@ -1,0 +1,32 @@
+from numpy import *
+from matplotlib.pyplot import *
+
+R = 8.314/100
+
+def P(T,v,a,b):
+    Pressure = R*T/(v - b) - a/(v**2.)
+    return Pressure
+    
+"""
+Para uso futuro:
+Tc = 8.*a/(27.*R*b)
+vc = 3.*b
+Pc = a/(27.*(b**2.))
+""" 
+
+#Nitrógeno
+aN = 1.370
+bN = 0.0387
+
+TcN = 8.*aN/(27.*R*bN)
+vcN = 3.*bN
+PcN = aN/(27.*(bN**2.))
+print "La presión y volumen críticos son, respectivamente, %f y %f" % (PcN, vcN)
+
+vN = arange(0.25, 2.5, 0.002)
+TN = array([26.161, TcN, 226.161])
+
+pN1, pN2, pN3 = plot(vN, P(TN[0], vN, aN, bN), 'b-', vN, P(TcN, vN, aN, bN), 'k-', vN, P(TN[2], vN, aN, bN), 'r-')
+grid()
+xlim(0.25, 2.5)
+show()
